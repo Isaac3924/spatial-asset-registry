@@ -8,7 +8,7 @@ This project was built to demonstrate an **AI-Assisted (Agentic) Software Develo
 2. **AI Implementation:** GitHub Copliot Chat (Claude Sonnet 5) was utilized aas an autonomous agent within VS Code to generate the boilerplate, apply Jkarta Bean Validation, and write the JUnit 5 test suites.
 3. **Engineering Validation:** AI outputs were strictly reviewed to ensure proper `@Valid` boundary enforcement (e.g., rejecting out-of-bounds latitude/longitude coordinates) and correct N-Tier architectural separation.
 
-##Tech Stack
+## Tech Stack
 * **Language:** Java 21 LTS
 * **Framework:** Spring Boot 3.4
 * **Persistence:** Spring Data JPA, H2 In-Memory Database
