@@ -14,6 +14,7 @@ Create an entity `SpatialAsset` with the following attributes:
 ## 2. Persistence Layer
 - Use Spring Data JPA repository (`SpatialAssetRepository`).
 - Add a custom query method: `findBySensorType(String sensorType)`.
+- Add a bounding box query method: `findByLatitudeBetweenAndLongitudeBetween(Double minLat, Double maxLat, Double minLon, Double maxLon)`.
 - Use an in-memory H2 database.
 
 ## 3. API Layer (`SpatialAssetController`)
@@ -26,6 +27,9 @@ Endpoints:
 - `GET /api/v1/assets`: Retrieve all assets (returns `200 OK`).
 - `GET /api/v1/assets/{assetId}`: Retrieve an asset by `assetId` (returns `200 OK` or `404 Not Found`).
 - `GET /api/v1/assets/search?sensorType=...`: Filter assets by sensor type.
+- `GET /api/v1/assets/bbox`: Filter assets within a geospatial bounding box.
+  - Query parameters: `minLat`, `maxLat`, `minLon`, `maxLon` (all Double, required).
+  - Returns `200 OK` with a list of matching assets.
 
 ## 4. Verification
 - Provide JUnit 5 unit and integration tests using `@WebMvcTest` and `@DataJpaTest` to verify validation rules (especially latitude/longitude range bounds).

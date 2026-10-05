@@ -20,6 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(SpatialAssetController.class)
@@ -97,5 +98,19 @@ class SpatialAssetControllerTest {
 
         mockMvc.perform(get("/api/v1/assets/search").param("sensorType", "OPTICAL"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void searchByBoundingBox_returns200() throws Exception {
+        when(repository.findByLatitudeBetweenAndLongitudeBetween(40.0, 50.0, 80.0, 100.0))
+                .thenReturn(List.of(validAsset()));
+
+        mockMvc.perform(get("/api/v1/assets/bbox")
+                        .param("minLat", "40.0")
+                        .param("maxLat", "50.0")
+                        .param("minLon", "80.0")
+                        .param("maxLon", "100.0"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].assetId").value("LANDSAT-09-2026-A1"));
     }
 }

@@ -11,4 +11,7 @@ public interface SpatialAssetRepository extends JpaRepository<SpatialAsset, Long
     Optional<SpatialAsset> findByAssetId(String assetId);
 
     List<SpatialAsset> findBySensorType(String sensorType);
+
+    List<SpatialAsset> findByLatitudeBetweenAndLongitudeBetween(Double minLat, Double maxLat, Double minLon,
+            Double maxLon);
 }

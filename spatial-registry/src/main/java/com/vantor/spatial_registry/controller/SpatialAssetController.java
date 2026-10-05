@@ -47,4 +47,10 @@ public class SpatialAssetController {
     public ResponseEntity<List<SpatialAsset>> searchBySensorType(@RequestParam String sensorType) {
         return ResponseEntity.ok(repository.findBySensorType(sensorType));
     }
+
+    @GetMapping("/bbox")
+    public ResponseEntity<List<SpatialAsset>> searchByBoundingBox(@RequestParam Double minLat,
+            @RequestParam Double maxLat, @RequestParam Double minLon, @RequestParam Double maxLon) {
+        return ResponseEntity.ok(repository.findByLatitudeBetweenAndLongitudeBetween(minLat, maxLat, minLon, maxLon));
+    }
 }
