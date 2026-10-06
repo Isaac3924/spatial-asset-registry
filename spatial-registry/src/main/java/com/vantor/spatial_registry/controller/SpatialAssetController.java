@@ -5,6 +5,7 @@ import com.vantor.spatial_registry.repository.SpatialAssetRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*") // Allows the Vue app to communicate with this API from any origin
 @RequestMapping("/api/v1/assets")
 public class SpatialAssetController {
 
