@@ -1,4 +1,4 @@
-# Specification: Geo spatial Asset Registry API
+# Specification: Geospatial Asset Registry API
 
 ## 1. Domain Model
 Create an entity `SpatialAsset` with the following attributes:
@@ -33,3 +33,10 @@ Endpoints:
 
 ## 4. Verification
 - Provide JUnit 5 unit and integration tests using `@WebMvcTest` and `@DataJpaTest` to verify validation rules (especially latitude/longitude range bounds).
+
+## 5. Continuous Integration & Deployment (CI/CD)
+- **Platform:** GitHub Actions.
+- **Trigger:** Push to the `main` branch.
+- **Authentication:** Use `aws-actions/configure-aws-credentials` with OIDC (role-to-assume provided via GitHub Secrets as `AWS_ROLE_ARN`). Region is `us-east-1`.
+- **Build & Push:** Authenticate via `amazon-ecr-login`, build the Docker image explicitly for `linux/amd64`, and push it to the ECR repository (`spatial-registry-api`).
+- **Deploy:** Run `aws ecs update-service` with `--force-new-deployment` for the `spatial-registry-cluster` and `spatial-registry-service`.
