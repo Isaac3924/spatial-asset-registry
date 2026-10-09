@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:21-alpine AS builder
 WORKDIR /app
 COPY .mvn/ .mvn/
 COPY mvnw ./
@@ -8,7 +8,7 @@ RUN ./mvnw dependency:go-offline
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-FROM eclipse-temurin:21-jdk-alpine
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:21-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
